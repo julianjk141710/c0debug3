@@ -48,6 +48,7 @@ public final class Analyser {
     int retFlag = 0;
     int compareFlag = 0;
     int addBrFlag = 0;
+    int argaFlag = 1;
 
     /** 当前偷看的 token */
     Token peekedToken = null;
@@ -807,6 +808,10 @@ public final class Analyser {
 
         var functionReturnType = analyseTy();
 
+        if (functionReturnType.equals("int")) {
+            argaFlag = 0;
+        }
+
         localSymbolTable.setFunctionReturnType(functionReturnType);
 
         var newFunction = new Function(String.valueOf(functionName.getValue()), numOfParam, typeOfParam, functionReturnType);
@@ -872,6 +877,8 @@ public final class Analyser {
         clearLocalVariableStack();
         clearInstructions();
         clearParamAndReturnValueStack();
+
+        argaFlag = 1;
     }
 
     /**
@@ -1914,7 +1921,7 @@ public final class Analyser {
         int offset = this.paramAndReturnValueStack.getOffset(String.valueOf(token.getValue()));
         navmInstruction.setOpcode(navmInstruction.getOpcode(Instructions.arga));
         navmInstruction.setHasParam(true);
-        navmInstruction.setParam(offset);
+        navmInstruction.setParam(offset - argaFlag);
         this.instructions.add(navmInstruction);
     }
 
