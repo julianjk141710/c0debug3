@@ -77,6 +77,9 @@ public class Tokenizer {
      * @return
      */
     private Token lexStringLiteral() throws TokenizeError {
+        int peepNextCharFlag = 0;
+        char escapeChar = 0;
+
         StringBuilder stringBuilder = new StringBuilder();
         Pos intStartPos = it.currentPos();
         Pos intEndPos = it.nextPos();
@@ -93,14 +96,23 @@ public class Tokenizer {
                     break;
                 }
             } else if (peekChar == '\\') {
+                peepNextCharFlag = 1;
                 char peepNextChar = it.seeNextChar();
+                escapeChar = peepNextChar;
                 if (peepNextChar != '\\' && peepNextChar != '\'' && peepNextChar != '"' && peepNextChar != 'n'
                         && peepNextChar != 'r' && peepNextChar != 't') {
+
                     throw new TokenizeError(ErrorCode.InvalidInput, it.previousPos());
                 }
+
             }
             previousChar = peekChar;
             stringBuilder.append(peekChar);
+            if (peepNextCharFlag == 1) {
+                peepNextCharFlag = 0;
+                stringBuilder.append(escapeChar);
+                it.nextChar();
+            }
             it.nextChar();
             peekChar = it.peekChar();
         }
