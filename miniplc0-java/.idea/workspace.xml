@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d5feadbc-02b1-4e0a-b337-12b50b70d0d2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/Tokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/Tokenizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/token.txt" beforeDir="false" afterPath="$PROJECT_DIR$/token.txt" afterDir="false" />
-    </list>
+    <list default="true" id="d5feadbc-02b1-4e0a-b337-12b50b70d0d2" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -155,6 +150,7 @@
       <workItem from="1607328358617" duration="11743000" />
       <workItem from="1607358441385" duration="24874000" />
       <workItem from="1607429386309" duration="19743000" />
+      <workItem from="1607505890391" duration="60000" />
     </task>
     <servers />
   </component>
@@ -174,10 +170,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="458" y="223" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1440.900@0.0.1440.900" timestamp="1606402286847" />
-    <state x="157" y="96" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607503668005">
+    <state x="157" y="96" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607505955275">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="157" y="96" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1607503668005" />
+    <state x="157" y="96" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1607505955275" />
     <state x="157" y="96" key="#com.intellij.execution.impl.EditConfigurationsDialog/1440.0.1112.834/0.0.1440.900@0.0.1440.900" timestamp="1603264021722" />
     <state x="533" y="141" key="#com.intellij.ide.util.MemberChooser" timestamp="1607333872132">
       <screen x="0" y="0" width="1440" height="900" />
