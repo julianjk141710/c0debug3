@@ -77,6 +77,8 @@ public class Tokenizer {
      * @return
      */
     private Token lexStringLiteral() throws TokenizeError {
+        //int secondEscapeFlag = 0;
+
         StringBuilder stringBuilder = new StringBuilder();
         Pos intStartPos = it.currentPos();
         Pos intEndPos = it.nextPos();
@@ -92,18 +94,49 @@ public class Tokenizer {
                     it.nextChar();
                     break;
                 }
-            } else if (peekChar == '\\') {
+            }
+            /** 原来的代码 */
+//            else if (peekChar == '\\') {
+//                char peepNextChar = it.seeNextChar();
+//                if (peepNextChar != '\\' && peepNextChar != '\'' && peepNextChar != '"' && peepNextChar != 'n'
+//                        && peepNextChar != 'r' && peepNextChar != 't') {
+//                    throw new TokenizeError(ErrorCode.InvalidInput, it.previousPos());
+//                }
+//            }
+
+            /** new code */
+            else if (peekChar == '\\') {
                 char peepNextChar = it.seeNextChar();
-                if (peepNextChar != '\\' && peepNextChar != '\'' && peepNextChar != '"' && peepNextChar != 'n'
-                        && peepNextChar != 'r' && peepNextChar != 't') {
+                if (peepNextChar == '\\') {
+                    stringBuilder.append('\\');
+                } else if (peepNextChar == '\'') {
+                    stringBuilder.append('\'');
+                } else if (peepNextChar == '"') {
+                    stringBuilder.append('"');
+                } else if (peepNextChar == 'n') {
+                    stringBuilder.append('\n');
+                } else if (peepNextChar == 'r') {
+                    stringBuilder.append('\r');
+                } else if (peepNextChar == 't') {
+                    stringBuilder.append('\t');
+                } else {
                     throw new TokenizeError(ErrorCode.InvalidInput, it.previousPos());
                 }
+                it.nextChar();
+                previousChar = it.peekChar();
+                it.nextChar();
+                peekChar = it.peekChar();
+                continue;
             }
+            /** code end */
+
+
             previousChar = peekChar;
             stringBuilder.append(peekChar);
-            it.nextChar();
+            previousChar = it.nextChar();
             peekChar = it.peekChar();
         }
+
         var tmpStringLiteral = stringBuilder.toString();
         Token retToken = new Token(TokenType.STRING_LITERAL, tmpStringLiteral, intStartPos, intEndPos);
         return retToken;
