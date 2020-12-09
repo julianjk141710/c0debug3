@@ -77,9 +77,6 @@ public class Tokenizer {
      * @return
      */
     private Token lexStringLiteral() throws TokenizeError {
-        int peepNextCharFlag = 0;
-        char escapeChar = 0;
-
         StringBuilder stringBuilder = new StringBuilder();
         Pos intStartPos = it.currentPos();
         Pos intEndPos = it.nextPos();
@@ -96,23 +93,14 @@ public class Tokenizer {
                     break;
                 }
             } else if (peekChar == '\\') {
-                peepNextCharFlag = 1;
                 char peepNextChar = it.seeNextChar();
-                escapeChar = peepNextChar;
                 if (peepNextChar != '\\' && peepNextChar != '\'' && peepNextChar != '"' && peepNextChar != 'n'
                         && peepNextChar != 'r' && peepNextChar != 't') {
-
                     throw new TokenizeError(ErrorCode.InvalidInput, it.previousPos());
                 }
-
             }
             previousChar = peekChar;
             stringBuilder.append(peekChar);
-            if (peepNextCharFlag == 1) {
-                peepNextCharFlag = 0;
-                stringBuilder.append(escapeChar);
-                it.nextChar();
-            }
             it.nextChar();
             peekChar = it.peekChar();
         }
@@ -205,35 +193,11 @@ public class Tokenizer {
                  * 这里peepNextChar其实应该是seeNextChar但是上面指针动了一下就不能seeNextChar了
                  * 下面的peepNextChar同理
                  */
-//                peepNextChar = it.getCurrentChar();
-//                startPos = it.previousPos();
-//                if (peepNextChar == '>') {
-//                    it.nextChar();
-//                    return new Token(TokenType.ARROW, "->", startPos, it.currentPos());
-//                } else {
-//                    while (peepNextChar == '-') {
-//                        it.nextChar();
-//                        peepNextChar = it.getCurrentChar();
-//                    }
-//                }
-//                return new Token(TokenType.MINUS, '-', it.previousPos(), it.currentPos());
-                int numOfMinus = 0;
                 peepNextChar = it.getCurrentChar();
                 startPos = it.previousPos();
                 if (peepNextChar == '>') {
                     it.nextChar();
                     return new Token(TokenType.ARROW, "->", startPos, it.currentPos());
-                }
-                else {
-                    numOfMinus ++;
-                    while (peepNextChar == '-') {
-                        numOfMinus ++;
-                        it.nextChar();
-                        peepNextChar = it.getCurrentChar();
-                    }
-                }
-                if (numOfMinus % 2 == 0) {
-                    return new Token(TokenType.PLUS, '+', it.previousPos(), it.currentPos());
                 }
                 return new Token(TokenType.MINUS, '-', it.previousPos(), it.currentPos());
 
