@@ -193,11 +193,30 @@ public class Tokenizer {
                  * 这里peepNextChar其实应该是seeNextChar但是上面指针动了一下就不能seeNextChar了
                  * 下面的peepNextChar同理
                  */
+//                peepNextChar = it.getCurrentChar();
+//                startPos = it.previousPos();
+//                if (peepNextChar == '>') {
+//                    it.nextChar();
+//                    return new Token(TokenType.ARROW, "->", startPos, it.currentPos());
+//                }
+//                return new Token(TokenType.MINUS, '-', it.previousPos(), it.currentPos());
+                int numOfMinus = 0;
                 peepNextChar = it.getCurrentChar();
                 startPos = it.previousPos();
                 if (peepNextChar == '>') {
                     it.nextChar();
                     return new Token(TokenType.ARROW, "->", startPos, it.currentPos());
+                }
+                else {
+                    numOfMinus ++;
+                    while (peepNextChar == '-') {
+                        numOfMinus ++;
+                        it.nextChar();
+                        peepNextChar = it.getCurrentChar();
+                    }
+                }
+                if (numOfMinus % 2 == 0) {
+                    return new Token(TokenType.PLUS, '+', it.previousPos(), it.currentPos());
                 }
                 return new Token(TokenType.MINUS, '-', it.previousPos(), it.currentPos());
 
