@@ -1,0 +1,27 @@
+package miniplc0java.navm;
+
+public enum Instructions {
+    push,
+    pop,
+    popn,
+    loca,
+    arga,
+    globa,
+    load,
+    store,
+    stackalloc,
+    add,
+    sub,
+    mul,
+    div,
+    call,
+    ret,
+    callname,
+    neg,
+    cmpi,
+    not,
+    SetLt,
+    SetGt,
+    BrTrue,
+    Br,
+}
