@@ -41,7 +41,16 @@ public class StringIter {
             return;
         }
         while (scanner.hasNext()) {
-            linesBuffer.add(scanner.nextLine() + '\n');
+            /** new code */
+            String s = scanner.nextLine();
+            if (s.indexOf("//") != -1) {
+                continue;
+            }
+            linesBuffer.add(s + '\n');
+            /** code end */
+
+            /** code before */
+            //linesBuffer.add(scanner.nextLine() + '\n');
         }
         for (String s : linesBuffer) {
             System.out.print(s);

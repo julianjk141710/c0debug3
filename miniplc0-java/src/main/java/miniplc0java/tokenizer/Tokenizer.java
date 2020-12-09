@@ -259,6 +259,9 @@ public class Tokenizer {
 
             case '/':
                 // 填入返回语句
+                /** new code */
+                
+                /** code end */
                 return new Token(TokenType.DIV, '/', it.previousPos(), it.currentPos());
 
 
